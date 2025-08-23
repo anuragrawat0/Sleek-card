@@ -1,29 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { IoSunnyOutline } from "react-icons/io5";
-import { FaRegMoon } from "react-icons/fa";
+import Button from "./Button";
 
 const Card = () => {
-  const [theme, setTheme] = useState("light");
-
-  // Load theme from localStorage on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme-tailwind");
-    if (savedTheme) {
-      setTheme(savedTheme);
-      if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark");
-      }
-    }
-  }, []);
-
-  const handleChange = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem("theme-tailwind", newTheme);
-  };
 
   return (
     <div className="relative flex h-full w-full items-center justify-center">
@@ -45,31 +23,7 @@ const Card = () => {
             wondering… will I even have a job this year?
           </p>
         </div>
-        <label
-          onClick={handleChange}
-          htmlFor="check"
-          className="relative mx-2 flex h-10 w-32 items-center gap-2 rounded-full bg-neutral-300 px-1 text-center text-[10px] font-semibold transition-colors dark:bg-neutral-700 cursor-pointer"
-          aria-label="Toggle themer"
-        >
-          <span
-            className={`flex h-8 w-9 items-center justify-center rounded-full bg-neutral-200 transition-all duration-500 dark:bg-neutral-600 ${
-              theme === "dark" ? "translate-x-21" : "translate-x-0"
-            }`}
-          >
-            {theme === "light" ? (
-              <IoSunnyOutline size={19} />
-            ) : (
-              <FaRegMoon size={19} />
-            )}{" "}
-          </span>
-          <span
-            className={`transition-all duration-500 ${
-              theme === "dark" ? "-mx-6" : ""
-            }`}
-          >
-            {theme === "light" ? "Bright as fuck" : "Dark as shit"}
-          </span>
-        </label>
+        <Button />
       </div>
     </div>
   );
